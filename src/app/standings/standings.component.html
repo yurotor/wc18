@@ -1,0 +1,22 @@
+
+<table class="table table-hover text-center container" style="max-width: 50rem;">
+    <thead>
+      <tr>
+        <th scope="col">Rank</th>
+        <th scope="col">Name</th>
+        <th scope="col">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="light" *ngFor="let user of data.standings; let i = index">
+        <td scope="row">{{i+1}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.points}}</td>
+      </tr>
+    </tbody>
+  </table>
+<!-- <ol>
+  <li *ngFor="let user of data.standings">
+    {{user.name}} {{user.points}}
+  </li>
+</ol> -->

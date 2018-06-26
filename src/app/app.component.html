@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <span class="navbar-brand" href="#">Danel - WC2018</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/games">Games</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/standings">Standings</a>
+        </li>        
+      </ul>
+     
+      <form class="form-inline my-2 my-lg-0">
+        <button type="button" class="btn btn-secondary my-2 my-sm-0" data-toggle="modal" data-target="#login" *ngIf="!data.isLoggedIn">Login</button>
+        <span *ngIf="data.isLoggedIn" class="navbar-brand" style="float: right;">
+            Welcome {{data.loginInfo.Name}}
+            <button type="button" class="btn btn-secondary my-2 my-sm-0" (click)="data.logout()">Logout</button>
+        </span>
+      </form>
+    </div>
+  </nav>
+
+<br>
+<br>
+<br>
+<router-outlet></router-outlet>
+
+<!-- Modal -->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" [(ngModel)]="user">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password" [(ngModel)]="pass">
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onOkClick()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>

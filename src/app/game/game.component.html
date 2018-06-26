@@ -1,0 +1,45 @@
+<br>
+<div class="card border-primary mb-3 text-center container"  style="max-width: 50rem;" (mouseenter) ="mouseEnter(game)"  (mouseleave) ="mouseLeave(game)">
+  <div class="card-header">
+      {{game.Group}} ({{game.MatchTime | date: 'EEEE dd/MM HH:mm'}})
+      
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">
+      <img [src]="getImg(game.Team1)" height="42" width="42">
+      {{game.Team1}} {{game.Score1}} - {{game.Score2}} {{game.Team2}}
+      <img [src]="getImg(game.Team2)" height="42" width="42">
+    </h4>
+    <p class="card-text text-primary" *ngIf="isFuture">Game starts in {{message}}</p>
+    <p class="card-text" *ngIf="data.predictions">{{predictionOf(game)}}</p>
+    <button type="button" style="float: right;" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#predict" 
+          *ngIf="isEditable" (click)="predict()">Predict</button>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="predict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{this.data.editingGame.Group}} ({{this.data.editingGame.MatchTime | date: 'EEEE dd/MM HH:mm'}})</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">{{this.data.editingGame.Team1}}</label>
+                <input type="number" class="form-control" min="0" [(ngModel)]="score1">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">{{this.data.editingGame.Team2}}</label>
+                <input type="number" class="form-control" min="0" [(ngModel)]="score2">
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onOkClick()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
